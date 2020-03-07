@@ -1,0 +1,104 @@
+<div class="container">
+    <div *ngIf="showBill">
+        <div class="row">
+            <div class="table-responsive m-5">
+                <h3>Purchase History</h3>
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let bill of allBills">
+                            <td>
+                                <button type="button" class="btn btn-outline-primary w-100" data-toggle="collapse"
+                                    attr.data-target="#bill{{ bill.billId }}">
+                                    <span class="float-left">Bill Id: {{ bill.billId }}</span>
+                                    <span class="float-middle">Bill Dated: {{ bill.billDate|date: 'long' }}</span>
+                                    <span class="float-right">Bill Amount: Rs. {{ bill.billAmount }}</span>
+                                </button>
+
+                                <div class="collapse" id="bill{{ bill.billId }}">
+                                    <div class="row mt-5">
+                                        <div class="col">
+                                            <div class="row mt-2">
+                                                <div class="col">
+                                                    <h1>Bill</h1>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4>eMart Services</h4>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="float-left">
+                                                        Contact Us: eMart@abc.com
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="float-right">
+                                                        Buyer Name: {{ currentBuyer.buyerUsername  }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="float-left">
+                                                        Date: {{ bill.billDate |date: 'long'}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="float-right">
+                                                        Buyer Id: {{ currentBuyer.buyerId }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="table-responsive m-2"></div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr bgcolor="black">
+                                                    <th class="text-white">ID</th>
+                                                    <th class="text-white">Particulars</th>
+                                                    <th class="text-white">Quantity</th>
+                                                    <th class="text-white">Rate</th>
+                                                    <th class="text-white">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of bill.allBillDetails">
+                                                    <td>{{ item.item.itemId }}</td>
+                                                    <td>{{ item.item.itemName }}</td>
+                                                    <td>1</td>
+                                                    <td>₹ {{ item.item.itemPrice }}</td>
+                                                    <td>₹ {{ item.item.itemPrice }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <h5>Total:</h5>
+                                                    </td>
+                                                    <td>₹ {{ bill.billAmount }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!showBill">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <span class="display-4 text-danger">Purchase History is Empty!!</span>
+            </div>
+        </div>
+    </div>
+</div>
